@@ -61,14 +61,14 @@ html {
   color: #2c3e50;
 }
 
-body {
+body, #root {
   margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.main {
+main {
   flex: 1;
 }
 
@@ -124,7 +124,6 @@ body {
   width: 200px;
 }
 
-/*noinspection CssUnknownTarget*/
 .hero {
   background-image: url("/assets/bank-tree.jpeg");
   background-position: 0 -50px;

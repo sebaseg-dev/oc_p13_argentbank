@@ -2,6 +2,8 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
 export default function Profile() {
+  document.title = 'Argent Bank - Profile Page'
+
   return <>
     <Header/>
 
