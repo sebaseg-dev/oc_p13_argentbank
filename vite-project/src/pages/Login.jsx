@@ -1,8 +1,13 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import { Link } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { toggleConnected } from '../redux.js'
 
 export default function Login () {
   document.title = 'Argent Bank - Login Page'
+
+  const dispatch = useDispatch()
 
   return <>
     <Header/>
@@ -27,7 +32,7 @@ export default function Login () {
           >
           </div>
           {/*PLACEHOLDER DUE TO STATIC SITE*/}
-          {/*<a href="./user.html" className="sign-in-button">Sign In</a>*/}
+          <Link to="/profile" className="sign-in-button" onClick={() => {dispatch(toggleConnected())}}>Sign In</Link>
           {/*SHOULD BE THE BUTTON BELOW*/}
           {/*<button className="sign-in-button">Sign In</button>*/}
 
