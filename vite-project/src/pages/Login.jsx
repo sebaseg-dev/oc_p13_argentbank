@@ -1,6 +1,5 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import { Link } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { toggleConnected } from '../redux.js'
 
@@ -8,6 +7,41 @@ export default function Login () {
   document.title = 'Argent Bank - Login Page'
 
   const dispatch = useDispatch()
+
+
+  //request from postman
+  const myFetch = (email, password) => {
+    const myHeaders = new Headers();
+    myHeaders.append("accept", "application/json");
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "email": "tony@stark.com",
+      "password": "password123"
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://localhost:3001/api/v1/user/login", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  }
+
+  const loginRequest = (e) => {
+    e.preventDefault()
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    console.log('loginRequest - username: ', username, " - password: ", password)
+
+    myFetch()
+    dispatch(toggleConnected())
+  }
 
   return <>
     <Header/>
@@ -32,9 +66,9 @@ export default function Login () {
           >
           </div>
           {/*PLACEHOLDER DUE TO STATIC SITE*/}
-          <Link to="/profile" className="sign-in-button" onClick={() => {dispatch(toggleConnected())}}>Sign In</Link>
+          {/*<Link to="/profile" className="sign-in-button" onClick={(e) => {loginRequest(e)}}>Sign In</Link>*/}
           {/*SHOULD BE THE BUTTON BELOW*/}
-          {/*<button className="sign-in-button">Sign In</button>*/}
+          <button className="sign-in-button" onClick={(e) => {loginRequest(e)}}>Sign In</button>
 
         </form>
       </section>
