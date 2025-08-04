@@ -1,13 +1,17 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import { useDispatch } from 'react-redux'
-import { toggleConnected } from '../redux.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleConnected, setToken } from '../redux.js'
+import { useNavigate } from 'react-router'
 
 export default function Login () {
   document.title = 'Argent Bank - Login Page'
 
   const dispatch = useDispatch()
 
+  const userLogin = useSelector(state => state.userLogin)
+
+  const navigate = useNavigate()
 
   //request from postman
   const myFetch = (email, password) => {
@@ -16,8 +20,8 @@ export default function Login () {
     myHeaders.append("Content-Type", "application/json");
 
     const raw = JSON.stringify({
-      "email": "tony@stark.com",
-      "password": "password123"
+      "email": email,
+      "password": password,
     });
 
     const requestOptions = {
@@ -28,8 +32,19 @@ export default function Login () {
     };
 
     fetch("http://localhost:3001/api/v1/user/login", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === 200) {
+          console.log('login successful');
+          console.log(userLogin);
+          dispatch(toggleConnected());
+          dispatch(setToken(result.body.token));
+          navigate("/profile");
+        } else {
+          console.error(result.statusText);
+        }
+
+      })
       .catch((error) => console.error(error));
   }
 
@@ -39,8 +54,7 @@ export default function Login () {
     const password = document.getElementById('password').value
     console.log('loginRequest - username: ', username, " - password: ", password)
 
-    myFetch()
-    dispatch(toggleConnected())
+    myFetch(username, password)
   }
 
   return <>

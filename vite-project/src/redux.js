@@ -4,8 +4,7 @@ const initialState = {
   connected: false,
   token: '',
   user: {
-    // id: undefined,
-    // email: '',
+    fetched: false,
     firstName: '',
     lastName: '',
   }
@@ -17,6 +16,16 @@ const userLoginSlice = createSlice({
   reducers: {
     toggleConnected: (state, action) => {
       state.connected = !state.connected;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    toggleUserFetched: (state, action) => {
+      state.user.fetched = !state.user.fetched;
+    },
+    setUserInfo: (state, action) => {
+      state.user.firstName = action.payload.firstName;
+      state.user.lastName = action.payload.lastName;
     }
   },
 })
@@ -27,4 +36,4 @@ export const store = configureStore({
   }
 })
 
-export const { toggleConnected  } = userLoginSlice.actions;
+export const { toggleConnected, setToken  , toggleUserFetched, setUserInfo} = userLoginSlice.actions;
