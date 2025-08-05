@@ -87,20 +87,26 @@ export default function Profile() {
 
     <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br/>{userLogin.user.firstName} {userLogin.user.lastName}!</h1>
+        <h1>Welcome back</h1>
 
-        {editMode ? (<>
-            <input type={"text"} value={firstNameInputValue} onChange={(e) => {setFirstNameInputValue(e.target.value)}}/>
-            <input type={"text"} value={lastNameInputValue} onChange={(e) => {setLastNameInputValue(e.target.value)}}/>
-            <button onClick={handleSave}>Save</button>
-            <button onClick={() => { setEditMode(false)} }>Cancel</button>
-          </>
-        ) : (
-          <button className="edit-button" onClick={() => {
-            setEditMode(true)
-            setFirstNameInputValue(userLogin.user.firstName);
-            setLastNameInputValue(userLogin.user.lastName);
-          }}>Edit Name</button>
+        {editMode ? (<div className="profile-edit-form">
+            <div className="profile-edit-form__input-fields">
+              <input type={"text"} value={firstNameInputValue} onChange={(e) => {setFirstNameInputValue(e.target.value)}}/>
+              <input type={"text"} value={lastNameInputValue} onChange={(e) => {setLastNameInputValue(e.target.value)}}/>
+            </div>
+            <div className="profile-edit-form__buttons">
+              <button className="save-button" onClick={handleSave}>Save</button>
+              <button className="cancel-button" onClick={() => { setEditMode(false)} }>Cancel</button>
+            </div>
+          </div>
+        ) : (<div>
+            <h1>{userLogin.user.firstName} {userLogin.user.lastName}!</h1>
+            <button className="edit-button" onClick={() => {
+              setEditMode(true)
+              setFirstNameInputValue(userLogin.user.firstName);
+              setLastNameInputValue(userLogin.user.lastName);
+            }}>Edit Name</button>
+          </div>
         )}
 
       </div>

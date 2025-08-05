@@ -22,21 +22,24 @@ export default function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
         {userLogin.connected ?
-          <div>
+          <div className="main-nav-menu">
             <Link className="main-nav-item" to="/profile">
               <i className="fa fa-user-circle"></i>
               {userLogin.user.firstName}
             </Link>
-            <button className="main-nav-item" onClick={() => {
+            <Link to="#" className="main-nav-item" onClick={() => {
               dispatch(toggleConnected())
               navigate('/')
             }}>
               <i className="fa fa-sign-out"></i>Sign Out
-            </button>
+            </Link>
           </div> :
-          <Link className="main-nav-item" to="/login">
-            <i className="fa fa-user-circle"></i>Sign In
-          </Link>
+          <div className="main-nav-menu">
+            <Link className="main-nav-item" to="/login">
+              <i className="fa fa-user-circle"></i>
+              Sign In
+            </Link>
+          </div>
         }
     </nav>
   </>
