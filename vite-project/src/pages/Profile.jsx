@@ -3,84 +3,41 @@ import Footer from '../components/Footer.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleUserFetched, setUserInfo } from '../redux.js'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import apiGetUserInformation from '../services/apiGetUserInformation.js'
+import apiPutUserInformation from '../services/apiPutUserInformation.js'
 
 export default function Profile() {
   document.title = 'Argent Bank - Profile Page'
 
   const userLogin = useSelector(state => state.userLogin)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [editMode, setEditMode] = useState(false)
   const [firstNameInputValue, setFirstNameInputValue] = useState(null)
   const [lastNameInputValue, setLastNameInputValue] = useState(null)
 
-  console.log("depuis profile : ", userLogin)
+  const fetchData = async (token) => {
+    const result = await apiGetUserInformation(token);
 
+    if (result.status === 200) {
+      dispatch(toggleUserFetched());
+      dispatch(setUserInfo({
+        firstName: result.body.firstName,
+        lastName: result.body.lastName,
+      }));
+    } else if (result.status === 401) {
+      navigate('/');
+    }
+  }
 
   useEffect(() => {
-      const myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer " + userLogin.token);
-
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        redirect: "follow"
-      };
-
-      fetch("http://localhost:3001/api/v1/user/profile", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          console.log("Fetch depuis profile ", result);
-          if (result.status === 200){
-            dispatch(toggleUserFetched());
-            dispatch(setUserInfo({
-              firstName: result.body.firstName,
-              lastName: result.body.lastName,
-            }));
-          } else {
-            console.error(result.statusText);
-          }
-        })
-        .catch((error) => console.error(error));
-  }, [editMode])
-
-  const handleSave = () => {
-    console.log("HANDLE_SAVE")
-    console.log(firstNameInputValue, lastNameInputValue)
-
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer " + userLogin.token);
-    myHeaders.append("Content-Type", "application/json");
-
-
-    const raw = JSON.stringify({
-      "firstName": firstNameInputValue,
-      "lastName": lastNameInputValue,
-    })
-
-    console.log(raw);
-
-    const requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow"
-    };
-
-    fetch("http://localhost:3001/api/v1/user/profile", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .then(() => {
-        setEditMode(false)
-      })
-      .catch((error) => console.error(error));
-  }
-
-
-  //early return if the user is not connected
-  if (!userLogin.connected){
-    return <><Header></Header><div>Not connected</div></>
-  }
+    async function initialiseData() {
+      await fetchData(userLogin.token);
+    }
+    initialiseData();
+  }, [editMode]);
 
   return <>
     <Header/>
@@ -95,8 +52,13 @@ export default function Profile() {
               <input type={"text"} value={lastNameInputValue} onChange={(e) => {setLastNameInputValue(e.target.value)}}/>
             </div>
             <div className="profile-edit-form__buttons">
-              <button className="save-button" onClick={handleSave}>Save</button>
-              <button className="cancel-button" onClick={() => { setEditMode(false)} }>Cancel</button>
+              <button className="save-button" onClick={async () => {
+                const response = await apiPutUserInformation(userLogin.token ,firstNameInputValue, lastNameInputValue);
+                if (response.status === 200) {
+                  setEditMode(false)
+                }
+              }}>Save</button>
+              <button className="cancel-button" onClick={() => { setEditMode(false) } }>Cancel</button>
             </div>
           </div>
         ) : (<div>

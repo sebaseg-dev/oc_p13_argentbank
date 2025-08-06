@@ -380,5 +380,17 @@ main {
     width: 200px;
   }
 }
+@keyframes shake {
+  25% {
+    transform: translateX(8px);
+  }
+  75% {
+    transform: translateX(-8px);
+  }
+}
+.invalid-form-field {
+  border-color: #f44336;
+  animation: shake 0.3s 3 linear;
+}
 
 /*# sourceMappingURL=main.css.map */

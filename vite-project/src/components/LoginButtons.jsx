@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 export default function LoginButtons() {
   const userLogin = useSelector((state) => state.userLogin)
 
-  const signIn = () => {
+  const signOut = () => {
     return <>
       <div className="main-nav-menu">
         <Link className="main-nav-item" to="/profile">
@@ -22,7 +22,7 @@ export default function LoginButtons() {
     </>
   }
 
-  const signOut = () => {
+  const signIn = () => {
     return <>
       <div className="main-nav-menu">
         <Link className="main-nav-item" to="/login">
