@@ -58,7 +58,7 @@ main {
   gap: 8px;
 }
 
-.main-nav-item:hover {
+.main-nav-item:hover > span {
   text-decoration: underline;
 }
 

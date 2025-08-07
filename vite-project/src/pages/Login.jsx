@@ -1,15 +1,23 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import apiGetToken from '../services/apiGetToken.js'
 import { setToken, toggleConnected } from '../redux.js'
+import { useEffect } from 'react'
 
 export default function Login () {
     document.title = 'Argent Bank - Login Page'
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const userLogin = useSelector(state => state.userLogin)
+
+    useEffect(() => {
+        if (userLogin.connected) {
+            navigate('/profile')
+        }
+    }, [])
 
     const loginRequest = async (e) => {
         e.preventDefault()

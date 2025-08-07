@@ -10,13 +10,13 @@ export default function LoginButtons () {
             <div className="main-nav-menu">
                 <Link className="main-nav-item" to="/profile">
                     <i className="fa fa-user-circle"></i>
-                    {userLogin.user.firstName}
+                    <span>{userLogin.user.firstName}</span>
                 </Link>
                 <Link to="#" className="main-nav-item" onClick={() => {
                     dispatch(toggleConnected())
                     navigate('/')
                 }}>
-                    <i className="fa fa-sign-out"></i>Sign Out
+                    <i className="fa fa-sign-out"></i><span>Sign Out</span>
                 </Link>
             </div>
         </>
@@ -27,7 +27,7 @@ export default function LoginButtons () {
             <div className="main-nav-menu">
                 <Link className="main-nav-item" to="/login">
                     <i className="fa fa-user-circle"></i>
-                    Sign In
+                    <span>Sign In</span>
                 </Link>
             </div>
         </>
