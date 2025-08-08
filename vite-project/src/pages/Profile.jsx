@@ -1,5 +1,3 @@
-import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserInfo, toggleUserFetched } from '../redux.js'
 import { useEffect, useState } from 'react'
@@ -42,8 +40,6 @@ export default function Profile () {
     }, [editMode])
 
     return <>
-        <Header/>
-
         <main className="main bg-dark">
             <div className="header">
                 <h1>Welcome back</h1>
@@ -85,7 +81,5 @@ export default function Profile () {
             <PlaceholderProfileAccounts/>
 
         </main>
-
-        <Footer/>
     </>
 }

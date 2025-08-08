@@ -1,11 +1,25 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { getLoginCookie } from './services/localStorage.js'
+
+const cookies = getLoginCookie()
+
+let connectedInitialValue = false
+let tokenInitialValue = null
+let firstnameInitialValue = null
+
+console.log(cookies)
+
+if (cookies.token) {
+    connectedInitialValue = true
+    tokenInitialValue = cookies.token
+}
 
 const initialState = {
-    connected: false,
-    token: '',
+    connected: connectedInitialValue,
+    token: tokenInitialValue,
     user: {
         fetched: false,
-        firstName: '',
+        firstName: firstnameInitialValue,
         lastName: '',
     }
 }

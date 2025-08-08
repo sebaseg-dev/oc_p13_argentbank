@@ -1,8 +1,7 @@
-import Header from '../components/Header.jsx'
-import Footer from '../components/Footer.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import apiGetToken from '../services/apiGetToken.js'
+import { setLoginCookie } from '../services/localStorage.js'
 import { setToken, toggleConnected } from '../redux.js'
 import { useEffect } from 'react'
 
@@ -21,6 +20,7 @@ export default function Login () {
 
     const loginRequest = async (e) => {
         e.preventDefault()
+
         const username = document.getElementById('username')
         const password = document.getElementById('password')
         const result = await apiGetToken(username.value, password.value)
@@ -28,6 +28,12 @@ export default function Login () {
         if (result.status === 200) {
             dispatch(toggleConnected())
             dispatch(setToken(result.body.token))
+
+            const rememberMe = document.getElementById('remember-me')
+            if (rememberMe.checked) {
+                setLoginCookie(result.body.token, result.body.token)
+            }
+
             navigate('/profile')
         } else if (result.message === 'Error: Password is invalid') {
             password.value = ''
@@ -42,8 +48,6 @@ export default function Login () {
     }
 
     return <>
-        <Header/>
-
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
@@ -69,7 +73,5 @@ export default function Login () {
                 </form>
             </section>
         </main>
-
-        <Footer/>
     </>
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { toggleConnected } from '../redux.js'
 import { useSelector } from 'react-redux'
+import { deleteLoginCookie } from '../services/localStorage.js'
 
 export default function LoginButtons () {
     const userLogin = useSelector((state) => state.userLogin)
@@ -13,6 +14,7 @@ export default function LoginButtons () {
                     <span>{userLogin.user.firstName}</span>
                 </Link>
                 <Link to="#" className="main-nav-item" onClick={() => {
+                    deleteLoginCookie()
                     dispatch(toggleConnected())
                     navigate('/')
                 }}>
