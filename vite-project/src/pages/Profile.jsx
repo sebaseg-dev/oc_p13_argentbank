@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserInfo, toggleUserFetched } from '../redux.js'
+import { setUserInfo } from '../redux.js'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import apiGetUserInformation from '../services/apiGetUserInformation.js'
@@ -21,7 +21,6 @@ export default function Profile () {
         const result = await apiGetUserInformation(token)
 
         if (result.status === 200) {
-            dispatch(toggleUserFetched())
             dispatch(setUserInfo({
                 firstName: result.body.firstName,
                 lastName: result.body.lastName,
