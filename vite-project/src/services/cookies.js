@@ -1,19 +1,3 @@
-export function setLocalStorage (token) {
-    let expiryDate = new Date()
-    expiryDate.setDate(expiryDate.getDate() + 1)
-
-    try {
-        localStorage.setItem('authToken', token)
-        localStorage.setItem('authTokenExpiry', expiryDate.toString())
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-export function getLocalStorage () {
-
-}
-
 export function setLoginCookie (token) {
     let expiryDate = new Date()
     expiryDate.setDate(expiryDate.getDate() + 1)

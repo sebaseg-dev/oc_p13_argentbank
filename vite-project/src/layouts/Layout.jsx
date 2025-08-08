@@ -3,7 +3,7 @@ import Footer from '../components/Footer.jsx'
 import { Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getLoginCookie } from '../services/localStorage.js'
+import { getLoginCookie } from '../services/cookies.js'
 import { setToken, setUserInfo } from '../redux.js'
 import apiGetUserInformation from '../services/apiGetUserInformation.js'
 

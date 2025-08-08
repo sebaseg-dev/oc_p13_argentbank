@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import apiGetToken from '../services/apiGetToken.js'
-import { setLoginCookie } from '../services/localStorage.js'
+import { setLoginCookie } from '../services/cookies.js'
 import { setToken, toggleConnected } from '../redux.js'
 import { useEffect } from 'react'
 
