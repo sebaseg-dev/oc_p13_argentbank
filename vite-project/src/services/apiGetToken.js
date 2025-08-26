@@ -1,27 +1,30 @@
-import { MAINCONFIG } from '../mainConfig.js'
+import { MAINCONFIG } from "../mainConfig.js";
 
-export default async function apiGetToken (email, password) {
+export default async function apiGetToken(email, password) {
     const headers = {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
+        accept: "application/json",
+        "Content-Type": "application/json",
+    };
 
     const body = JSON.stringify({
-        'email': email,
-        'password': password,
-    })
+        email: email,
+        password: password,
+    });
 
     const requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: headers,
         body: body,
-        redirect: 'follow'
-    }
+        redirect: "follow",
+    };
 
     try {
-        const response = await fetch((MAINCONFIG.serverUrl + '/api/v1/user/login'), requestOptions)
-        return await response.json()
+        const response = await fetch(
+            MAINCONFIG.serverUrl + "/api/v1/user/login",
+            requestOptions
+        );
+        return await response.json();
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }

@@ -1,15 +1,15 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { getLoginCookie } from './services/cookies.js'
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { getLoginCookie } from "./services/cookies.js";
 
-const cookies = getLoginCookie()
+const cookies = getLoginCookie();
 
-let connectedInitialValue = false
-let tokenInitialValue = null
-let firstnameInitialValue = null
+let connectedInitialValue = false;
+let tokenInitialValue = null;
+let firstnameInitialValue = null;
 
 if (cookies.token) {
-    connectedInitialValue = true
-    tokenInitialValue = cookies.token
+    connectedInitialValue = true;
+    tokenInitialValue = cookies.token;
 }
 
 const initialState = {
@@ -17,35 +17,32 @@ const initialState = {
     token: tokenInitialValue,
     user: {
         firstName: firstnameInitialValue,
-        lastName: '',
-    }
-}
+        lastName: "",
+    },
+};
 
 const userLoginSlice = createSlice({
-    name: 'userLogin',
+    name: "userLogin",
     initialState: initialState,
     reducers: {
         toggleConnected: (state) => {
-            state.connected = !state.connected
+            state.connected = !state.connected;
         },
         setToken: (state, action) => {
-            state.token = action.payload
+            state.token = action.payload;
         },
         setUserInfo: (state, action) => {
-            state.user.firstName = action.payload.firstName
-            state.user.lastName = action.payload.lastName
-        }
+            state.user.firstName = action.payload.firstName;
+            state.user.lastName = action.payload.lastName;
+        },
     },
-})
+});
 
 export const store = configureStore({
     reducer: {
-        userLogin: userLoginSlice.reducer
-    }
-})
+        userLogin: userLoginSlice.reducer,
+    },
+});
 
-export const {
-    toggleConnected,
-    setToken,
-    setUserInfo
-} = userLoginSlice.actions
+export const { toggleConnected, setToken, setUserInfo } =
+    userLoginSlice.actions;

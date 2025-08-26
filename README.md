@@ -1,13 +1,14 @@
-# 💳 OpenClassrooms - Projet 13 ArgentBank
+# OpenClassrooms - Projet 13 ArgentBank
 
 ## 📖 Sommaire
 - [📌 Description](#-description)
+- [👀 Aperçu](#-aperçu)
 - [⚙️ Installation](#-installation)
 - [▶️ Utilisation](#-utilisation)
 - [🏗 Architecture de l'application](#-architecture-de-lapplication)
 - [🛠️ Technologies utilisées](#-technologies-utilisées)
 - [👀 Aperçu](#-aperçu)
-- [⚠️ Avertissements sécurité](#-avertissement-sécurité)
+- [⚠️ Avertissement sécurité](#-avertissement-sécurité)
 
 ---
 
@@ -25,6 +26,16 @@ Code source du **Projet 13 - ArgentBank** : *Utilisez une API pour un compte uti
 - [Maquette HTML et CSS statique](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API/tree/master/designs)
 - [Liste de features à implémenter](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API/tree/master/.github/ISSUE_TEMPLATE)
 - [Back-end API](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
+- [Documentation Recharts pour l'implémentation des graphiques](https://recharts.org/en-US/storybook)
+
+---
+
+## 👀 Aperçu
+
+| 🏠 Page d’accueil                  | 🔑 Page de connexion              | 🧑‍💻 Profil utilisateur             |
+|------------------------------------|-----------------------------------|--------------------------------------|
+| ![Accueil](./assets/home-page.png) | ![Login](./assets/login-page.png) | ![Profil](./assets/profile-page.png) |
+
 
 ---
 
@@ -112,24 +123,20 @@ npm run preview
 - eslint-plugin-react-hooks ^5.2.0
 - eslint-plugin-react-refresh ^0.4.20
 - globals ^16.3.0
+- Prettier 3.6.2
 
 ---
 
 ## 📜 Scripts disponibles
 
-| Commande          | Description                                    |
-|-------------------|------------------------------------------------|
-| `npm run dev`     | Lance le serveur de développement Vite         |
-| `npm run build`   | Construit le projet pour la production         |
-| `npm run preview` | Prévisualise le build de production localement |
-| `npm run lint`    | Vérifie la qualité du code avec ESLint         |
-| `npm run sass`    | Compile les fichiers SCSS en CSS (watch mode)  |
-
----
-
-## 👀 Aperçu
-
-> *(ajouter ici des captures d’écran du projet : page de login, dashboard, etc.)*
+| Commande           | Description                                    |
+|--------------------|------------------------------------------------|
+| `npm run dev`      | Lance le serveur de développement Vite         |
+| `npm run build`    | Construit le projet pour la production         |
+| `npm run preview`  | Prévisualise le build de production localement |
+| `npm run lint`     | Vérifie la qualité du code avec ESLint         |
+| `npm run sass`     | Compile les fichiers SCSS en CSS (watch mode)  |
+| `npm run prettier` | Formate automatiquement le code avec Prettier  |
 
 ---
 

@@ -1,20 +1,23 @@
-import { MAINCONFIG } from '../mainConfig.js'
+import { MAINCONFIG } from "../mainConfig.js";
 
-export default async function apiGetUserInformation (token) {
+export default async function apiGetUserInformation(token) {
     const headers = {
-        'Authorization': `Bearer ${token}`
-    }
+        Authorization: `Bearer ${token}`,
+    };
 
     const requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: headers,
-        redirect: 'follow'
-    }
+        redirect: "follow",
+    };
 
     try {
-        const response = await fetch(`${MAINCONFIG.serverUrl}/api/v1/user/profile`, requestOptions)
-        return await response.json()
+        const response = await fetch(
+            `${MAINCONFIG.serverUrl}/api/v1/user/profile`,
+            requestOptions
+        );
+        return await response.json();
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
