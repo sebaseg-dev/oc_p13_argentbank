@@ -155,7 +155,7 @@ npm run preview
 
 ### 🛠️ Dépendances de développement
 #### 🔧 Build & Plugins
-- Vite ^7.0.4
+- Vite ^7.1.5
 - @vitejs/plugin-react ^4.6.0
 
 #### ✨ Typages
