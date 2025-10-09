@@ -47,13 +47,13 @@ Code source du **Projet 13 - ArgentBank** : *Utilisez une API pour un compte uti
 
 #### Prérequis
 
-> Le front-end utilise la **version 20 de** [**Node.js**](https://nodejs.org/en/).
+Le front-end utilise la **version 20 de** [**Node.js**](https://nodejs.org/en/).
 
-> Le back-end provient du [repo non maintenu d'OpenClassrooms](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API), dépendance des technologies et verisons suivantes:
->
-> - **Version 12 de** [**Node.js**](https://nodejs.org/en/).
-> - [**MongoDB Community Server**](https://www.mongodb.com/try/download/community)
+Le back-end provient du [repo non maintenu d'OpenClassrooms](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API), dépendance des technologies:
+- [**Node.js**](https://nodejs.org/en/) _(à partir de la version 12, testé avec la version 20)_.
+- [**MongoDB Community Server**](https://www.mongodb.com/try/download/community)
 
+> La **version 20** de [**Node.js**](https://nodejs.org/en/) est nécessaire pour utiliser le projet.
 
 ```bash
 # Clonez le projet
@@ -67,7 +67,6 @@ Back-end:
 cd ./back/
 
 # Installer les dépendances du back-end
-nvm use 12
 npm install
 
 # Initialiser la base de données MongoDB avec 2 utilisateurs
@@ -81,7 +80,6 @@ Front-end:
 cd ./front/
 
 # Installer les dépendances du front-end
-nvm use 20
 npm install
 ```
 
