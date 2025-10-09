@@ -41,10 +41,6 @@ Code source du **Projet 13 - ArgentBank** : *Utilisez une API pour un compte uti
 
 ## ⚙️ Installation
 
-### 📋 Prérequis
-- [Node.js](https://nodejs.org/) **>= 18**
-- npm (fourni avec Node.js)
-
 ### 🚀 Étapes d'installation
 
 > Toutes les commandes précitées ci-dessous s'exécutent à la racine du repo.
