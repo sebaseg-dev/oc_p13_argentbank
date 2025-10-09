@@ -46,13 +46,46 @@ Code source du **Projet 13 - ArgentBank** : *Utilisez une API pour un compte uti
 - npm (fourni avec Node.js)
 
 ### 🚀 Étapes d'installation
+
+> Toutes les commandes précitées ci-dessous s'exécutent à la racine du repo.
+
+#### Prérequis
+
+> Le front-end utilise la **version 20 de** [**Node.js**](https://nodejs.org/en/).
+
+> Le back-end provient du [repo non maintenu d'OpenClassrooms](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API), dépendance des technologies et verisons suivantes:
+>
+> - **Version 12 de** [**Node.js**](https://nodejs.org/en/).
+> - [**MongoDB Community Server**](https://www.mongodb.com/try/download/community)
+
+
 ```bash
 # Clonez le projet
 git clone <url-du-repo>
+```
+
+Back-end:
+
+```bash
+# Se placer dans le répertoire du back-end
+cd ./back/
+
+# Installer les dépendances du back-end
+nvm use 12
+npm install
+
+# Initialiser la base de données MongoDB avec 2 utilisateurs
+npm run populate-db
+```
+
+Front-end:
+
+```bash
+# Se placer dans le répertoire du front-end
 cd ./front/
 
-# Installez les dépendances
-cd ./vite-front/
+# Installer les dépendances du front-end
+nvm use 20
 npm install
 ```
 
@@ -60,16 +93,28 @@ npm install
 
 ## ▶️ Utilisation
 
-⚠️ **Avant de lancer le front-end, assurez-vous d’avoir démarré le [back-end](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API).**
+### Lancement du back-end
 
-### Développement
 ```bash
+cd ./back/
+nvm use 12
+npm run dev:server
+```
+
+### Lancement du front-end
+
+#### Développement
+```bash
+cd ./front/
+nvm use 20
 npm run dev
 ```
 → Lance l’application React avec **Vite** en mode développement.
 
-### Production
+#### Production
 ```bash
+cd ./front/
+nvm use 20
 npm run build
 ```
 → Génère un dossier `dist/` contenant les fichiers optimisés pour la production.
