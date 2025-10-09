@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toggleConnected } from "../redux.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteLoginCookie } from "../services/cookies.js";
 
 export default function LoginButtons() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const userLogin = useSelector((state) => state.userLogin);
 
     const signOut = () => {
@@ -15,7 +17,7 @@ export default function LoginButtons() {
                         <span>{userLogin.user.firstName}</span>
                     </Link>
                     <Link
-                        to="#"
+                        to="/"
                         className="main-nav-item"
                         onClick={() => {
                             deleteLoginCookie();

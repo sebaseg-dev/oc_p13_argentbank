@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import apiGetToken from "../services/apiGetToken.js";
 import { setLoginCookie } from "../services/cookies.js";
 import { setToken, toggleConnected } from "../redux.js";
@@ -16,7 +16,7 @@ export default function Login() {
         if (userLogin.connected) {
             navigate("/profile");
         }
-    }, []);
+    }, [userLogin.connected, navigate]);
 
     const loginRequest = async (e) => {
         e.preventDefault();
@@ -31,7 +31,7 @@ export default function Login() {
 
             const rememberMe = document.getElementById("remember-me");
             if (rememberMe.checked) {
-                setLoginCookie(result.body.token, result.body.token);
+                setLoginCookie(result.body.token);
             }
 
             navigate("/profile");

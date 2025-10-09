@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../redux.js";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import apiGetUserInformation from "../services/apiGetUserInformation.js";
 import apiPutUserInformation from "../services/apiPutUserInformation.js";
 import { PlaceholderProfileAccounts } from "../components/PlaceholderData.jsx";
