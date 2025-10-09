@@ -49,10 +49,10 @@ Code source du **Projet 13 - ArgentBank** : *Utilisez une API pour un compte uti
 ```bash
 # Clonez le projet
 git clone <url-du-repo>
-cd argent-bank
+cd ./front/
 
 # Installez les dépendances
-cd ./vite-project/
+cd ./vite-front/
 npm install
 ```
 

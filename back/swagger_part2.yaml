@@ -1,0 +1,435 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /accounts:
+    get:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Transactions Module
+      summary: List of Accounts
+      description: Get the list of accounts and the current balance, for one user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Account'
+        '401':
+          description: Not logged in
+        '403':
+          description: Access denied
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/month-transactions:
+    get:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Transactions Module
+      summary: List of Transactions
+      description: Get the list of transactions for the last month, for one specified account
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: id of the account
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid fields
+        '401':
+          description: Not logged in
+        '403':
+          description: Access denied
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+  /categories:
+    get:
+      tags:
+        - Transactions Module
+      summary: Categories
+      description: Retrieves the list of expenses categories managed in the app
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successfull operation
+          schema:
+            $ref: '#/definitions/Categories'
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}/category:
+    put:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Transactions Module
+      summary: Modify transaction's category
+      description: Allows user to change category for one transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: id of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: payload
+          description: Modification Payload
+          required: true
+          schema:
+            $ref: '#/definitions/EditableTransactionCategory'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successfull operation
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid fields
+        '401':
+          description: Not logged in
+        '403':
+          description: Access denied
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}/notes:
+    put:
+      security:
+        - Bearer: [ ]
+      tags:
+        - Transactions Module
+      summary: Modify transaction's notes
+      description: Allows user to change notes for one transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: id of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: payload
+          description: Modification Payload
+          required: true
+          schema:
+            $ref: '#/definitions/EditableTransactionNotes'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successfull operation
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid fields
+        '401':
+          description: Not logged in
+        '403':
+          description: Access denied
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+  /user/login:
+    post:
+      tags:
+        - User Module
+      summary: Login
+      description: API for Login
+      parameters:
+        - in: body
+          name: body
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Login Successfully
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/signup:
+    post:
+      tags:
+        - User Module
+      summary: Signup
+      description: API for Signup
+      parameters:
+        - in: body
+          name: body
+          description: Signup Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Signup Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/profile:
+    post:
+      security:
+        - Bearer: [ ]
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: [ ]
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for updating a user profile
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/UserProfile'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      firstName:
+        type: string
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+  Login:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+  Account:
+    type: object
+    properties:
+      accountId:
+        type: integer
+        example: 574937295757392
+      accountName:
+        type: string
+        example: "Argent Bank Savings (x6712)"
+      accountCurrentBalance:
+        type: string
+        example: 10928.42
+  Transaction:
+    type: object
+    properties:
+      transactionId:
+        type: integer
+        example: 424242
+      date:
+        type: string
+        format: date-time
+      description:
+        type: string
+        example: "Golden Sun Bakery"
+      amount:
+        type: integer
+        example: 50
+      balance:
+        type: integer
+        example: 2187.79
+      transactionType:
+        type: string
+        example: Electronic
+      category:
+        type: integer
+        example: 1
+      notes:
+        type: string
+        example: "Café with Sylvie"
+  Categories:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+        name:
+          type: string
+          enum:
+            - Housing
+            - Food
+            - Transport
+            - Healthcare
+            - Entertainment
+            - Education
+            - Shopping
+            - Other
+          example: Food
+      required:
+        - id
+        - name
+    example:
+      - id: 0
+        name: Housing
+      - id: 1
+        name: Food
+      - id: 2
+        name: Transport
+      - id: 3
+        name: Healthcare
+      - id: 4
+        name: Entertainment
+      - id: 5
+        name: Education
+      - id: 6
+        name: Shopping
+      - id: 7
+        name: Other
+  EditableTransactionCategory:
+    type: object
+    properties:
+      category:
+        type: integer
+        example: 1
+  EditableTransactionNotes:
+    type: object
+    properties:
+      notes:
+        type: string
+        example: "Café with Sylvie"
+
+
+
+
